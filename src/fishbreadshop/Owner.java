@@ -1,17 +1,33 @@
 package fishbreadshop;
 
 public class Owner {
-    private FishBread serve(FishBread fishBread) {
+    FishBreadType fishBreadType;
+
+    public void greetCustomer() {
+        System.out.println("        메뉴를 선택해주세요 !");
+    }
+
+    public FishBreadType orderDelivery(Order type) {
+        if (type.getMenuChoice() == 1) {
+            fishBreadType = FishBreadType.RED_BEAN;
+        } else if (type.getMenuChoice() == 2) {
+            fishBreadType = FishBreadType.CHOUXCREAM;
+        } else if (type.getMenuChoice() == 3) {
+            fishBreadType = FishBreadType.PIZZA;
+        }
+
+        return fishBreadType;
+    }
+
+    public int takeOrder(Order fishBreadCount) {
+        return fishBreadCount.getFishBreadCount();
+    }
+
+    public FishBread receive(FishBread fishBread) {
         return fishBread;
     }
 
-    private int deposit(Safe safe, int amount) {
-        int result = safe.store(amount, this);
-        return result;
-    }
-
-    private int withdraw(Safe safe, int amount) {
-        int result = safe.store(amount, this) - amount;
-        return result;
+    public FishBread serve(FishBread fishBread) {
+        return fishBread;
     }
 }
