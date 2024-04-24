@@ -3,10 +3,12 @@ package fishbreadshop;
 public class Order {
     private int menuChoice;
     private int fishBreadCount;
+    private int price;
 
     public Order(int menuChoice, int fishBreadCount) {
         this.menuChoice = menuChoice;
-        this.fishBreadCount = fishBreadCount;
+        this.fishBreadCount = fishBreadCount * 10;
+        this.price = fishBreadCount * 2000;
     }
 
     public int getMenuChoice() {
@@ -14,6 +16,10 @@ public class Order {
     }
 
     public int getFishBreadCount() {
-        return fishBreadCount * 10;
+        return fishBreadCount;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

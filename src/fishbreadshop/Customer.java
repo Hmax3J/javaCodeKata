@@ -12,6 +12,10 @@ public class Customer {
         System.out.println("고객님이 출현했습니다.");
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public Order order(Order order, Scanner sc) {
         while (true) {
             if (0 >= order.getMenuChoice() || order.getMenuChoice() > 4) {
@@ -28,12 +32,21 @@ public class Customer {
     }
 
     public void receive(FishBread fishBread) {
+        this.fishBreadType = fishBread.getFishBreadType();
         this.fishBreadCount = fishBread.getFishBreadCount();
+    }
+
+    public int payInCash(int amount) {
+        return amount;
+    }
+
+    public void getChange(int amount) {
+        this.amount = amount;
     }
 
     @Override
     public String toString() {
-        return "amount = " + amount +
-                ", fishBreadCount = " + fishBreadCount;
+        return "amount = " + amount + ", " +
+                fishBreadType + "fishBread : " + fishBreadCount + "EA";
     }
 }

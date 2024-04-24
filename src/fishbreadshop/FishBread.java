@@ -14,13 +14,16 @@ public class FishBread {
 //        }
     }
 
+    public FishBreadType getFishBreadType() {
+        return fishBreadType;
+    }
+
     public int getFishBreadCount() {
         return fishBreadCount;
     }
 
     @Override
     public String toString() {
-        return fishBreadType + "fishBread" +
-                ", FishBreadCount : " + fishBreadCount + "EA";
+        return fishBreadType + "fishBread : " + fishBreadCount + "EA";
     }
 }

@@ -30,4 +30,16 @@ public class Owner {
     public FishBread serve(FishBread fishBread) {
         return fishBread;
     }
+
+    public int getCash(int amount) {
+        return amount;
+    }
+
+    public int giveChange(Order order, int amount) {
+        return amount - order.getPrice();
+    }
+
+    public int deposit(Order order) {
+        return order.getPrice();
+    }
 }
