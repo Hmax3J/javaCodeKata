@@ -10,14 +10,14 @@ public class Main {
         Shef shef = new Shef(); // 쉐프 고용
 
         // 손님 출현, 메뉴판 표시, 사장 손님 맞이 인사, 손님 주문
-        Customer amugaeOne = new Customer(sc.nextInt());
+        Customer amugaeOne = new Customer(sc.nextInt(), sc);
         shop.menu();
         owner.greetCustomer();
         Order amugaeOneOrder = amugaeOne.order(new Order(sc.nextInt(), sc.nextInt()), sc);
 
         // 손님 결제 요청, 사장 결제 하기, 사장 잔돈 계산, 손님에게 잔돈 주기
         int amugaeOnePayMent = amugaeOne.payInCash(amugaeOne.getAmount());
-        int ownerGetCash = owner.getCash(amugaeOnePayMent);
+        int ownerGetCash = owner.getCash(amugaeOneOrder, amugaeOnePayMent);
         int ownerGiveChange = owner.giveChange(amugaeOneOrder, ownerGetCash);
         amugaeOne.getChange(ownerGiveChange);
 
@@ -31,12 +31,12 @@ public class Main {
         FishBread ownerReceive = owner.receive(shefOwnerServe);
 
         // 사장 손님에게 붕어빵 전달, 손님 붕어빵 받기
-        FishBread ownerServe = owner.serve(ownerReceive);
+        FishBread ownerServe = owner.serve(amugaeOneOrder, ownerReceive);
         amugaeOne.receive(ownerServe);
 
         // 사장 포스기에 판매 현황 입력하기, 판매 현황 보기, 포스기에 보관된 잔액 보기
         shop.pos(amugaeOneOrder, owner.deposit(amugaeOneOrder));
-        shop.salesStatus(owner);
-        shop.posAmount(owner);
+//        shop.salesStatus(owner);
+//        shop.posAmount(owner);
     }
 }

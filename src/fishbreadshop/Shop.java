@@ -40,7 +40,7 @@ public class Shop {
                          "피자 붕어빵빵 : " + pizzaFishBreadCount + "\n" +
                          "매출 금액 : " +
                                         (redBeanFishBreadCount +
-                                            chouxcreamFishBreadCount +
-                                            pizzaFishBreadCount) * 200 + "원" + "\n");
+                                         chouxcreamFishBreadCount +
+                                         pizzaFishBreadCount) * 200 + "원" + "\n");
     }
 }

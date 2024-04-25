@@ -22,4 +22,16 @@ public class Order {
     public int getPrice() {
         return price;
     }
+
+    public void setMenuChoice(int menuChoice) {
+        this.menuChoice = menuChoice;
+    }
+
+    public void setFishBreadCount(int fishBreadCount) {
+        this.fishBreadCount = fishBreadCount * 10;
+    }
+
+    public void setPrice(int fishBreadCount) {
+        this.price = fishBreadCount * 200;
+    }
 }
