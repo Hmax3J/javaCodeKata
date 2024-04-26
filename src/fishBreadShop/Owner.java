@@ -7,12 +7,12 @@ public class Owner {
         System.out.println("        메뉴를 선택해주세요 !");
     }
 
-    public FishBreadType orderDelivery(Order type) {
-        if (type.getMenuChoice() == 1) {
+    public FishBreadType orderDelivery(Order order) {
+        if (order.getMenuChoice() == 1) {
             fishBreadType = FishBreadType.RED_BEAN;
-        } else if (type.getMenuChoice() == 2) {
+        } else if (order.getMenuChoice() == 2) {
             fishBreadType = FishBreadType.CHOUXCREAM;
-        } else if (type.getMenuChoice() == 3) {
+        } else if (order.getMenuChoice() == 3) {
             fishBreadType = FishBreadType.PIZZA;
         }
 
@@ -23,7 +23,7 @@ public class Owner {
         return fishBreadCount.getFishBreadCount();
     }
 
-    public FishBread receive(FishBread fishBread) {
+    public FishBread receiveFishBread(FishBread fishBread) {
         return fishBread;
     }
 
@@ -34,7 +34,7 @@ public class Owner {
         return fishBread;
     }
 
-    public int getCash(Order order, int amount) {
+    public int receiveCash(Order order, int amount) {
         System.out.print("붕어빵 " + order.getFishBreadCount() + "개, 주문 받았습니다." + "\n" +
                         "결제 금액 " + order.getPrice() + "원 입니다." + "\n" +
                         amount + "원 받았습니다." + "\n");

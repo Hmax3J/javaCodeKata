@@ -5,23 +5,19 @@ import java.util.Scanner;
 public class Customer {
     private int amount;
     private int fishBreadCount;
-    private FishBreadType fishBreadType;
-
-    public Customer(int amount, Scanner sc) {
-        while (true) {
-            if (2000 > amount) {
-                System.out.println("아! 맞다. 2천원 부터였지.");
-                amount = sc.nextInt();
-            } else {
-                break;
-            }
-        }
-        this.amount = amount;
-        System.out.println("고객님이 출현했습니다.");
-    }
+    private FishBread fishBread;
 
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount, Scanner sc) {
+        System.out.println("붕어빵 사러 가야겠다. 돈 챙겨야지");
+        while (amount < 2000) {
+            System.out.println("아! 맞다. 2천원 부터였지.");
+            amount = sc.nextInt();
+        }
+        this.amount = amount;
     }
 
     public void orderCheck(Order order, Scanner sc) {
@@ -67,8 +63,8 @@ public class Customer {
         return order;
     }
 
-    public void receive(FishBread fishBread) {
-        this.fishBreadType = fishBread.getFishBreadType();
+    public void receiveFishBread(FishBread fishBread) {
+        this.fishBread = fishBread;
         this.fishBreadCount = fishBread.getFishBreadCount();
     }
 
@@ -76,13 +72,13 @@ public class Customer {
         return amount;
     }
 
-    public void getChange(int amount) {
+    public void receiveChange(int amount) {
         this.amount = amount;
     }
 
     @Override
     public String toString() {
         return "amount = " + amount + ", " +
-                fishBreadType + "fishBread : " + fishBreadCount + "EA";
+                fishBread.getFishBreadType() + "fishBread : " + fishBreadCount + "EA";
     }
 }
