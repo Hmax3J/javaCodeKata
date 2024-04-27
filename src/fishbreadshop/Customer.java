@@ -4,11 +4,14 @@ import java.util.Scanner;
 
 public class Customer {
     private int amount;
-    private int fishBreadCount;
-    private FishBread fishBread;
+    private FishBreadBag fishBreadBag;
 
     public int getAmount() {
         return amount;
+    }
+
+    public FishBreadBag getFishBreadBag() {
+        return fishBreadBag;
     }
 
     public void setAmount(int amount, Scanner sc) {
@@ -63,9 +66,8 @@ public class Customer {
         return order;
     }
 
-    public void receiveFishBread(FishBread fishBread) {
-        this.fishBread = fishBread;
-        this.fishBreadCount = fishBread.getFishBreadCount();
+    public void receiveFishBread(FishBreadBag fishBreadBag) {
+        this.fishBreadBag = fishBreadBag;
     }
 
     public int payInCash(int amount) {
@@ -74,11 +76,5 @@ public class Customer {
 
     public void receiveChange(int amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "amount = " + amount + ", " +
-                fishBread.getFishBreadType() + "fishBread : " + fishBreadCount + "EA";
     }
 }

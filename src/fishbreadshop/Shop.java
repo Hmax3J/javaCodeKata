@@ -1,5 +1,7 @@
 package fishbreadshop;
 
+import java.util.List;
+
 public class Shop {
     private int redBeanFishBreadCount;
     private int chouxcreamFishBreadCount;
@@ -19,14 +21,14 @@ public class Shop {
                 "======================================" + "\n");
     }
 
-    public void pos(Order order, int deposit) {
-        if (order.getMenuChoice() == 1) {
-            redBeanFishBreadCount += order.getFishBreadCount();
-        } else if (order.getMenuChoice() == 2) {
-            chouxcreamFishBreadCount += order.getFishBreadCount();
-        } else if (order.getMenuChoice() == 3) {
-            pizzaFishBreadCount += order.getFishBreadCount();
-        }
+    public void pos(Owner owner, List<FishBread> fishBread, int deposit) {
+        if (fishBread.get(0).getFishBreadType() == FishBreadType.RED_BEAN) {
+            redBeanFishBreadCount += fishBread.get(0).getFishBreadCount();
+        } else if (fishBread.get(0).getFishBreadType() == FishBreadType.CHOUXCREAM) {
+            chouxcreamFishBreadCount += fishBread.get(0).getFishBreadCount();
+        } else if (fishBread.get(0).getFishBreadType() == FishBreadType.PIZZA) {
+            pizzaFishBreadCount += fishBread.get(0).getFishBreadCount();
+        } // 아무거나 붕어빵 주문 했을 때 구현 해야 함.
         this.posAmount += deposit;
     }
 

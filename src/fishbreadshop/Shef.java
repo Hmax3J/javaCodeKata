@@ -1,20 +1,27 @@
 package fishbreadshop;
 
-public class Shef {
-    FishBread fishBread;
-    public FishBread cook(FishBreadType fishBreadType, int fishBreadCount) {
-        if (fishBreadType == FishBreadType.RED_BEAN) {
-            fishBread = new RedBeanFishBread(fishBreadCount);
-        } else if (fishBreadType == FishBreadType.CHOUXCREAM) {
-            fishBread = new ChouxCreamFishBread(fishBreadCount);
-        } else if (fishBreadType == FishBreadType.PIZZA) {
-            fishBread = new PizzaFishBread(fishBreadCount);
-        }
+import java.util.ArrayList;
+import java.util.List;
 
+public class Shef {
+
+    public List<FishBread> cook(FishBreadType fishBreadType, int fishBreadCount) {
+        List<FishBread> fishBread = new ArrayList<>();
+        if (fishBreadType == FishBreadType.RED_BEAN) {
+            fishBread.add(new RedBeanFishBread(fishBreadCount));
+        } else if (fishBreadType == FishBreadType.CHOUXCREAM) {
+            fishBread.add(new ChouxCreamFishBread(fishBreadCount));
+        } else if (fishBreadType == FishBreadType.PIZZA) {
+            fishBread.add(new PizzaFishBread(fishBreadCount));
+        } else if (fishBreadType == FishBreadType.ANYTHING) {
+            FishBread anythingFishBread = new AnythingFishBread(fishBreadCount);
+            List<FishBread> randomAnythingFishBread = anythingFishBread.randomFishBread(anythingFishBread);
+            fishBread.addAll(randomAnythingFishBread);
+        }
         return fishBread;
     }
 
-    public FishBread serve(FishBread fishBread) {
+    public List<FishBread> serve(List<FishBread> fishBread) {
         return fishBread;
     }
 }

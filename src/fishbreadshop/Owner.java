@@ -1,5 +1,7 @@
 package fishbreadshop;
 
+import java.util.List;
+
 public class Owner {
     FishBreadType fishBreadType;
 
@@ -14,6 +16,8 @@ public class Owner {
             fishBreadType = FishBreadType.CHOUXCREAM;
         } else if (order.getMenuChoice() == 3) {
             fishBreadType = FishBreadType.PIZZA;
+        } else if (order.getMenuChoice() == 4) {
+            fishBreadType = FishBreadType.ANYTHING;
         }
 
         return fishBreadType;
@@ -23,14 +27,32 @@ public class Owner {
         return fishBreadCount.getFishBreadCount();
     }
 
-    public FishBread receiveFishBread(FishBread fishBread) {
+    public List<FishBread> receiveFishBread(List<FishBread> fishBread) {
         return fishBread;
     }
 
-    public FishBread serve(Order order, FishBread fishBread) {
-        System.out.print("주문하신 " + fishBread.getFishBreadType() + "붕어빵 "
-                + order.getFishBreadCount() + "개 여기 있습니다." + "\n" +
-                        "기다려 주셔서 감사합니다." + "\n");
+    public List<FishBread> serve(List<FishBread> fishBread) {
+        if (fishBread.size() == 1) {
+            System.out.print("주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
+                    + fishBread.get(0).getFishBreadCount() + "개 여기 있습니다.\n" +
+                    "기다려 주셔서 감사합니다.\n");
+        } else if (fishBread.size() == 2) {
+            System.out.print(
+                    "주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
+                    + fishBread.get(0).getFishBreadCount() + "개, " +
+                    fishBread.get(1).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(1).getFishBreadCount() + "개 여기 있습니다.\n" +
+                    "기다려 주셔서 감사합니다.\n");
+        } else if (fishBread.size() == 3) {
+            System.out.print(
+                    "주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
+                            + fishBread.get(0).getFishBreadCount() + "개, " +
+                            fishBread.get(1).getFishBreadType() + "붕어빵 " +
+                            fishBread.get(1).getFishBreadCount() + "개, " +
+                            fishBread.get(2).getFishBreadType() + "붕어빵 " +
+                            fishBread.get(2).getFishBreadCount() + "개 여기 있습니다.\n" +
+                            "기다려 주셔서 감사합니다.\n");
+        }
         return fishBread;
     }
 

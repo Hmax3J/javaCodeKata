@@ -1,5 +1,6 @@
 package fishbreadshop;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -29,17 +30,18 @@ public class Main {
         FishBreadType ownerShefOrderDelivery = owner.orderDelivery(amugaeOneOrder);
 
         // 쉐프 붕어빵 만들기, 사장에게 붕어빵 전달, 사장 붕어빵 받기
-        FishBread shefCook = shef.cook(ownerShefOrderDelivery, ownerTakeOrder);
-        FishBread shefOwnerServe = shef.serve(shefCook);
-        FishBread ownerReceiveFishBread = owner.receiveFishBread(shefOwnerServe);
+        List<FishBread> shefCook = shef.cook(ownerShefOrderDelivery, ownerTakeOrder);
+        List<FishBread> shefOwnerServe = shef.serve(shefCook);
+        List<FishBread> ownerReceiveFishBread = owner.receiveFishBread(shefOwnerServe);
 
         // 사장 손님에게 붕어빵 전달, 손님 붕어빵 받기
-        FishBread ownerServe = owner.serve(amugaeOneOrder, ownerReceiveFishBread);
-        amugaeOne.receiveFishBread(ownerServe);
+        List<FishBread> ownerServe = owner.serve(ownerReceiveFishBread);
+        FishBreadBag fishBreadBag = new FishBreadBag(ownerServe);
+        amugaeOne.receiveFishBread(fishBreadBag);
 
         // 사장 포스기에 판매 현황 입력하기, 판매 현황 보기, 포스기에 보관된 잔액 보기
-        shop.pos(amugaeOneOrder, owner.deposit(amugaeOneOrder));
-//        shop.salesStatus(owner);
-//        shop.posAmount(owner);
+        shop.pos(owner, ownerServe, owner.deposit(amugaeOneOrder));
+        shop.salesStatus(owner);
+        shop.posAmount(owner);
     }
 }

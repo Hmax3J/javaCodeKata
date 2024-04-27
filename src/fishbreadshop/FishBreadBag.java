@@ -1,13 +1,12 @@
 package fishbreadshop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FishBreadBag {
-    FishBread fishBread;
+    List<FishBread> fishBread;
 
-    public FishBreadBag(FishBread fishBread) {
+    public FishBreadBag(List<FishBread> fishBread) {
         this.fishBread = fishBread;
-    }
-
-    public FishBread getFishBread() {
-        return fishBread;
     }
 }
