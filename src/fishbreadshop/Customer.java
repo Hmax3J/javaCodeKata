@@ -15,7 +15,6 @@ public class Customer {
     }
 
     public void setAmount(int amount, Scanner sc) {
-        System.out.println("붕어빵 사러 가야겠다. 돈 챙겨야지");
         while (amount < 2000) {
             System.out.println("아! 맞다. 2천원 부터였지.");
             amount = sc.nextInt();

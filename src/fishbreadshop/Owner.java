@@ -33,25 +33,27 @@ public class Owner {
 
     public List<FishBread> serve(List<FishBread> fishBread) {
         if (fishBread.size() == 1) {
-            System.out.print("주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
-                    + fishBread.get(0).getFishBreadCount() + "개 여기 있습니다.\n" +
+            System.out.print("주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(0).getFishBreadCount() + "개 여기 있습니다.\n" +
                     "기다려 주셔서 감사합니다.\n");
         } else if (fishBread.size() == 2) {
             System.out.print(
-                    "주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
-                    + fishBread.get(0).getFishBreadCount() + "개, " +
+                    "아무거나 붕어빵의 시그니처 랜덤 주문입니다.\n" +
+                    fishBread.get(0).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(0).getFishBreadCount() + "개, " +
                     fishBread.get(1).getFishBreadType() + "붕어빵 " +
                     fishBread.get(1).getFishBreadCount() + "개 여기 있습니다.\n" +
                     "기다려 주셔서 감사합니다.\n");
         } else if (fishBread.size() == 3) {
             System.out.print(
-                    "주문하신 " + fishBread.get(0).getFishBreadType() + "붕어빵 "
-                            + fishBread.get(0).getFishBreadCount() + "개, " +
-                            fishBread.get(1).getFishBreadType() + "붕어빵 " +
-                            fishBread.get(1).getFishBreadCount() + "개, " +
-                            fishBread.get(2).getFishBreadType() + "붕어빵 " +
-                            fishBread.get(2).getFishBreadCount() + "개 여기 있습니다.\n" +
-                            "기다려 주셔서 감사합니다.\n");
+                    "아무거나 붕어빵의 시그니처 랜덤 주문입니다.\n" +
+                    fishBread.get(0).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(0).getFishBreadCount() + "개, " +
+                    fishBread.get(1).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(1).getFishBreadCount() + "개, " +
+                    fishBread.get(2).getFishBreadType() + "붕어빵 " +
+                    fishBread.get(2).getFishBreadCount() + "개 여기 있습니다.\n" +
+                    "기다려 주셔서 감사합니다.\n");
         }
         return fishBread;
     }
@@ -78,5 +80,13 @@ public class Owner {
 
     public int deposit(Order order) {
         return order.getPrice();
+    }
+
+    public int withdrawPos(int salesAmount) {
+        return salesAmount;
+    }
+
+    public int depositSafe(int salesAmount) {
+        return salesAmount;
     }
 }

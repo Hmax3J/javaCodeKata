@@ -22,27 +22,47 @@ public class Shop {
     }
 
     public void pos(Owner owner, List<FishBread> fishBread, int deposit) {
-        if (fishBread.get(0).getFishBreadType() == FishBreadType.RED_BEAN) {
-            redBeanFishBreadCount += fishBread.get(0).getFishBreadCount();
-        } else if (fishBread.get(0).getFishBreadType() == FishBreadType.CHOUXCREAM) {
-            chouxcreamFishBreadCount += fishBread.get(0).getFishBreadCount();
-        } else if (fishBread.get(0).getFishBreadType() == FishBreadType.PIZZA) {
-            pizzaFishBreadCount += fishBread.get(0).getFishBreadCount();
-        } // 아무거나 붕어빵 주문 했을 때 구현 해야 함.
+        for (FishBread fishBreadAll : fishBread) {
+            switch (fishBreadAll.getFishBreadType()) {
+                case RED_BEAN:
+                    redBeanFishBreadCount += fishBreadAll.getFishBreadCount();
+                    break;
+                case CHOUXCREAM:
+                    chouxcreamFishBreadCount += fishBreadAll.getFishBreadCount();
+                    break;
+                case PIZZA:
+                    pizzaFishBreadCount += fishBreadAll.getFishBreadCount();
+                    break;
+                default:
+                    break;
+            }
+        }
         this.posAmount += deposit;
     }
 
-    public void posAmount(Owner owner) {
-        System.out.println("POS에 보관되어 있는 금액 : " + this.posAmount + "원");
+    public void posAmount(Owner owner, int salesAmount) {
+        if (salesAmount == 0) {
+            System.out.println("POS에 보관되어 있는 금액 : " + this.posAmount + "원");
+        } else {
+            System.out.println("POS에 보관되어 있는 금액 : " + (this.posAmount - salesAmount) + "원");
+        }
+
+    }
+
+    public int salesAmount(Owner owner) {
+        return this.posAmount - 100000;
     }
 
     public void salesStatus(Owner owner) {
-        System.out.print("팥 붕어빵빵빵 : " + redBeanFishBreadCount + "\n" +
-                         "슈크림 붕어빵 : " + chouxcreamFishBreadCount + "\n" +
-                         "피자 붕어빵빵 : " + pizzaFishBreadCount + "\n" +
-                         "매출 금액 : " +
+        System.out.print("   ↓        매출 현황        ↓   \n" +
+                         "=================================\n" +
+                         "        팥 붕어빵빵빵 : " + redBeanFishBreadCount + "\n" +
+                         "        슈크림 붕어빵 : " + chouxcreamFishBreadCount + "\n" +
+                         "        피자 붕어빵빵 : " + pizzaFishBreadCount + "\n" +
+                         "        매출 금액 : " +
                                         (redBeanFishBreadCount +
                                          chouxcreamFishBreadCount +
-                                         pizzaFishBreadCount) * 200 + "원" + "\n");
+                                         pizzaFishBreadCount) * 200 + "원\n" +
+                         "=================================\n");
     }
 }
