@@ -10,8 +10,26 @@ public class Customer {
         return amount;
     }
 
-    public FishBreadBag getFishBreadBag() {
-        return fishBreadBag;
+    public void getFishBreadBag() {
+        if (fishBreadBag.fishBread.size() == 1) {
+            System.out.print("보자 보자.. " +
+                    fishBreadBag.fishBread.get(0).getFishBreadType() + "붕어빵이 " +
+                    fishBreadBag.fishBread.get(0).getFishBreadCount() + "개 있네. \n");
+        } else if (fishBreadBag.fishBread.size() == 2) {
+            System.out.print("보자 보자.. " +
+                    fishBreadBag.fishBread.get(0).getFishBreadType() + "붕어빵이 " +
+                    fishBreadBag.fishBread.get(0).getFishBreadCount() + "개, " +
+                    fishBreadBag.fishBread.get(1).getFishBreadType() + "붕어빵이 " +
+                    fishBreadBag.fishBread.get(1).getFishBreadCount() + "개 있네. \n");
+        } else if (fishBreadBag.fishBread.size() == 3) {
+            System.out.print("보자 보자.. " +
+                            fishBreadBag.fishBread.get(0).getFishBreadType() + "붕어빵이 " +
+                            fishBreadBag.fishBread.get(0).getFishBreadCount() + "개, " +
+                            fishBreadBag.fishBread.get(1).getFishBreadType() + "붕어빵이 " +
+                            fishBreadBag.fishBread.get(1).getFishBreadCount() + "개, " +
+                            fishBreadBag.fishBread.get(2).getFishBreadType() + "붕어빵이 " +
+                            fishBreadBag.fishBread.get(2).getFishBreadCount() + "개 있네. \n");
+        }
     }
 
     public void setAmount(int amount, Scanner sc) {
