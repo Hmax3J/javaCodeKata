@@ -14,7 +14,7 @@ public class Main {
         Safe safe = new Safe(); // 금고 설치
         Owner owner = new Owner(); // 사장 출현
         Shef shef = new Shef(); // 쉐프 고용
-        Customer amugaeOne = new Customer(); // 손님 등장
+        Customer amugaeOne = null; // 손님 등장 할까 말까 대기
 
         while (true) {
             System.out.print("====================================================================\n" +
@@ -27,10 +27,15 @@ public class Main {
                 break;
             } else if (goShopOrHome == 2) {
                 System.out.println("붕어빵 확인 해볼까나.");
-                amugaeOne.getFishBreadBag();
+                if (amugaeOne == null) {
+                    System.out.println("붕어빵을 구매하지 않았습니다.");
+                } else {
+                    amugaeOne.getFishBreadBag();
+                }
             } else if (goShopOrHome == 1) {
                 System.out.println("붕어빵을 사볼까나. 얼마를 들고가지 ?");
                 // 손님 출현, 붕어빵 구매 금액 챙기기
+                amugaeOne = new Customer();
                 amugaeOne.setAmount(sc.nextInt(), sc);
 
                 // 메뉴판 표시, 사장 손님 맞이 인사, 손님 주문
