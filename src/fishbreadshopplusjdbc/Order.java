@@ -1,5 +1,7 @@
 package fishbreadshopplusjdbc;
 
+import java.sql.PreparedStatement;
+
 public class Order {
     private int menuChoice;
     private int fishBreadCount;
@@ -33,5 +35,19 @@ public class Order {
 
     public void setPrice(int fishBreadCount) {
         this.price = fishBreadCount * 200;
+    }
+
+    public void saveDatabase(DBUtil jdbcstudydb, int menuChoice, int fishBreadCount, int price, int customerid) {
+        try {
+            String sqlQuery = "INSERT INTO jdbcstudydb.order (menuchoice, fishbreadcount, price, customerid) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = jdbcstudydb.getConnection().prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, menuChoice);
+            preparedStatement.setInt(2, fishBreadCount);
+            preparedStatement.setInt(3, price);
+            preparedStatement.setInt(4, customerid);
+            preparedStatement.executeUpdate(); // insert, update는 이 메서드를 꼭 실행
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

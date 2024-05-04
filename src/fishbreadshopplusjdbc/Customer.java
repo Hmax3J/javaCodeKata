@@ -1,5 +1,8 @@
 package fishbreadshopplusjdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Customer {
@@ -37,6 +40,7 @@ public class Customer {
             System.out.println("아! 맞다. 2천원 부터였지.");
             amount = sc.nextInt();
         }
+
         this.amount = amount;
     }
 
@@ -83,7 +87,8 @@ public class Customer {
         return order;
     }
 
-    public void receiveFishBread(FishBreadBag fishBreadBag) {
+    public void receiveFishBread(DBUtil jdbcstudydb, FishBreadBag fishBreadBag) {
+        saveDatabase(jdbcstudydb, getAmount(), fishBreadBag);
         this.fishBreadBag = fishBreadBag;
     }
 
@@ -93,5 +98,51 @@ public class Customer {
 
     public void receiveChange(int amount) {
         this.amount = amount;
+    }
+
+    public void saveDatabase(DBUtil jdbcstudydb, int amount, FishBreadBag fishBreadBag) {
+        try {
+            Connection connection = jdbcstudydb.getConnection();
+            // 자동 커밋을 비활성화하여 트랜잭션을 시작합니다.
+            connection.setAutoCommit(false);
+
+            // 모든 붕어빵 주문을 하나의 customernumber에 묶기 위해 동일한 customernumber 사용
+            int numberTicket = getNewNumberTicket(jdbcstudydb);
+
+            String sqlQuery = "INSERT INTO jdbcstudydb.customer (amount, fishbreadtype, fishbreadcount, numberticket) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+
+            for (FishBread fishBread : fishBreadBag.getFishBread()) {
+                preparedStatement.setInt(1, amount);
+                preparedStatement.setString(2, fishBread.getFishBreadType().toString());
+                preparedStatement.setInt(3, fishBread.getFishBreadCount());
+                preparedStatement.setInt(4, numberTicket);
+                preparedStatement.addBatch();
+            }
+
+            // 배치 실행
+            preparedStatement.executeBatch();
+
+            // 커밋
+            connection.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getNewNumberTicket(DBUtil jdbcstudydb) {
+        int numberticket = 0;
+        try {
+            String sqlQuery = "SELECT MAX(numberticket) FROM jdbcstudydb.customer";
+            PreparedStatement preparedStatement = jdbcstudydb.getConnection().prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                numberticket = resultSet.getInt(1) + 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return numberticket;
     }
 }

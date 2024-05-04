@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        DBUtil jdbcstudydb = new DBUtil();
-        jdbcstudydb.dbConnect();
-        jdbcstudydb.getFishBreadBag();
+        runShop();
     }
 
     public static void runShop() {
+        DBUtil jdbcstudydb = new DBUtil();
+        jdbcstudydb.dbConnect();
         Scanner sc = new Scanner(System.in);
         Shop shop = new Shop(); // 가게 출현
         Safe safe = new Safe(); // 금고 설치
@@ -22,19 +22,19 @@ public class Main {
             System.out.print("====================================================================\n" +
                              "     1. 붕어빵을 구매한다. 2. 붕어빵을 확인한다. 3. 집으로 돌아간다. \n" +
                              "====================================================================\n");
-            int goShopOrHome = sc.nextInt();
+            int choice = sc.nextInt();
 
-            if (goShopOrHome == 3) {
+            if (choice == 3) {
                 System.out.println("집으로 가야겠다.");
                 break;
-            } else if (goShopOrHome == 2) {
+            } else if (choice == 2) {
                 System.out.println("붕어빵 확인 해볼까나.");
                 if (amugaeOne == null) {
                     System.out.println("붕어빵을 구매하지 않았습니다.");
                 } else {
                     amugaeOne.getFishBreadBag();
                 }
-            } else if (goShopOrHome == 1) {
+            } else if (choice == 1) {
                 System.out.println("붕어빵을 사볼까나. 얼마를 들고가지 ?");
                 // 손님 출현, 붕어빵 구매 금액 챙기기
                 amugaeOne = new Customer();
@@ -63,19 +63,19 @@ public class Main {
                 // 사장 손님에게 붕어빵 전달, 손님 붕어빵 받기
                 List<FishBread> ownerServe = owner.serve(ownerReceiveFishBread);
                 FishBreadBag fishBreadBag = new FishBreadBag(ownerServe);
-                amugaeOne.receiveFishBread(fishBreadBag);
+                amugaeOne.receiveFishBread(jdbcstudydb, fishBreadBag);
 
-                // 사장 pos기에 판매 현황 입력하기, 판매 현황 보기, 포스기에 보관된 잔액 보기
-                shop.pos(owner, ownerServe, owner.deposit(amugaeOneOrder));
-                shop.salesStatus(owner);
-
-                // 사장 pos기에서 매출 금액 출금, 금고에 매출 금액 입금, 금고 잔액 조회, pos기 잔액 조회
-                int salesAmount = shop.salesAmount(owner);
-                int withdrawPos = owner.withdrawPos(salesAmount);
-                int depositSafe = owner.depositSafe(withdrawPos);
-                safe.keepBalance(owner, depositSafe);
-                safe.checkBalance(owner);
-                shop.posAmount(owner, salesAmount);
+//                // 사장 pos기에 판매 현황 입력하기, 판매 현황 보기, 포스기에 보관된 잔액 보기
+//                shop.pos(owner, ownerServe, owner.deposit(amugaeOneOrder));
+//                shop.salesStatus(owner);
+//
+//                // 사장 pos기에서 매출 금액 출금, 금고에 매출 금액 입금, 금고 잔액 조회, pos기 잔액 조회
+//                int salesAmount = shop.salesAmount(owner);
+//                int withdrawPos = owner.withdrawPos(salesAmount);
+//                int depositSafe = owner.depositSafe(withdrawPos);
+//                safe.keepBalance(owner, depositSafe);
+//                safe.checkBalance(owner);
+//                shop.posAmount(owner, salesAmount);
             }
 
         }

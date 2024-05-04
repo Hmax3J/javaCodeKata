@@ -8,4 +8,8 @@ public class FishBreadBag {
     public FishBreadBag(List<FishBread> fishBread) {
         this.fishBread = fishBread;
     }
+
+    public List<FishBread> getFishBread() {
+        return fishBread;
+    }
 }
